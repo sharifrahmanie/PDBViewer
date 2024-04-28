@@ -11,5 +11,4 @@ pip install PDBViewer
 from PDBViewer.PDBViewer import PDBViewer
 viewer = PDBViewer()
 viewer.view('8DC4')
-
 ```
