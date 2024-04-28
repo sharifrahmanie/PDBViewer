@@ -1,7 +1,7 @@
+import os
 import urllib.request
 import gzip
 import py3Dmol
-import os
 
 class PDBViewer:
     def __init__(self):
@@ -9,9 +9,9 @@ class PDBViewer:
 
     def fetch_pdb(self, pdb_id):
         pdb_id = str(pdb_id).lower()
+        cwd = os.getcwd()
+        pdb_file = os.path.join(cwd, f'{pdb_id}.pdb')
         url = f'ftp://ftp.rcsb.org/pub/pdb/data/structures/all/pdb/pdb{pdb_id}.ent.gz'
-        download_dir = os.path.dirname(os.path.abspath(__file__))
-        pdb_file = os.path.join(download_dir, f'{pdb_id}.pdb')
         if not os.path.exists(pdb_file):
             urllib.request.urlretrieve(url, f'{pdb_file}.gz')
             with gzip.open(f'{pdb_file}.gz', 'rb') as f_in:
@@ -21,7 +21,7 @@ class PDBViewer:
     def view(self, pdb_id):
         self.fetch_pdb(pdb_id)
         pdb_id = str(pdb_id).lower()
-        pdb_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'{pdb_id}.pdb')
+        pdb_file = os.path.join(os.getcwd(), f'{pdb_id}.pdb')
         with open(pdb_file, 'r') as f:
             pdb_data = f.read()
         view = py3Dmol.view(width=600, height=400)
