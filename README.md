@@ -14,12 +14,5 @@ viewer.view('8DC4')
 ```
 
 
-```{r image}
-column(9,renderImage({
-  path <- "8DC4.png"
-  expr = list(src = path,
-              width = 750,
-       height = 400)
-}, deleteFile=F
-))
-```
+![8DC4](8DC4.png)
+
